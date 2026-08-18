@@ -1,0 +1,44 @@
+@import url('https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=Sora:wght@400;500;600&display=swap');
+
+:root {
+  /* ── Earthy / Organic palette ── */
+  --ground: #fefae0;       /* Cream — page background */
+  --ground-2: #ccd5ae;     /* Sage — panels / cards */
+  --ink: #01472e;          /* Forest — primary text */
+  --ink-2: #3d6b50;        /* Mid-forest — secondary text */
+  --muted: #a3b18a;        /* Moss — muted elements */
+  --amber: #01472e;        /* Forest — accent dot / selection */
+  --teal: #a3b18a;         /* Moss — secondary accent / rules */
+  --hairline: rgba(1, 71, 46, .12);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  background: var(--ground);
+}
+
+body {
+  font-family: 'Sora', sans-serif;
+  color: var(--ink);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+::selection {
+  background: var(--amber);
+  color: var(--ground);
+}
+
+a {
+  color: inherit;
+}
+
+#root {
+  min-height: 100vh;
+}
