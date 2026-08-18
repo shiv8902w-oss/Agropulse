@@ -1,0 +1,88 @@
+/* ============================================
+   MAGNIFICATION DOCK — macOS-style nav dock
+   ============================================ */
+
+.dock-outer {
+  display: flex;
+  max-width: 100%;
+  align-items: center;
+  justify-content: center;
+}
+
+.dock-panel {
+  display: flex;
+  align-items: center;
+  width: fit-content;
+  gap: 6px;
+  border-radius: 1.5rem;
+  border: 1px solid rgba(1, 71, 46, .12);
+  background: rgba(254, 250, 224, .55);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  padding: 0 12px;
+  box-shadow:
+    0 8px 32px -8px rgba(1, 71, 46, .10),
+    0 0 0 1px rgba(1, 71, 46, .04);
+}
+
+/* ── Item wrapper: icon + text side by side ── */
+.dock-item-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 0 6px 0 0;
+  cursor: pointer;
+  border-radius: 1rem;
+  transition: background .2s ease;
+}
+
+.dock-item-wrapper:hover {
+  background: rgba(1, 71, 46, .06);
+}
+
+/* ── Magnifying icon circle ── */
+.dock-item {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: var(--ground);
+  border: 1px solid rgba(1, 71, 46, .12);
+  box-shadow:
+    0 2px 8px -2px rgba(1, 71, 46, .12),
+    0 0 0 1px rgba(1, 71, 46, .03);
+  flex-shrink: 0;
+  outline: none;
+}
+
+.dock-item:focus-visible {
+  box-shadow:
+    0 0 0 2px var(--ground),
+    0 0 0 4px var(--ink);
+}
+
+/* ── Icon color ── */
+.dock-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--ink);
+}
+
+/* ── Always-visible text label ── */
+.dock-item-text {
+  font-family: 'Sora', sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: .04em;
+  color: var(--ink);
+  white-space: nowrap;
+  user-select: none;
+}
+
+@media (max-width: 540px) {
+  .dock-item-text {
+    display: none;
+  }
+}

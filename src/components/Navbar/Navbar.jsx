@@ -1,10 +1,26 @@
+import { LayoutDashboard, Bell, LogIn } from 'lucide-react';
+import MagnificationDock from '../MagnificationDock/MagnificationDock';
 import './Navbar.css';
 
-const navLinks = [
-  { label: 'Dashboard', href: '#solutions' },
-  { label: 'Sensors', href: '#sensors' },
-  { label: 'Alerts', href: '#alerts' },
-  { label: 'About', href: '#about' },
+const dockItems = [
+  {
+    icon: <LayoutDashboard size={22} />,
+    label: 'Dashboard',
+    onClick: () => {
+      const el = document.getElementById('solutions');
+      if (el) el.scrollIntoView({ behavior: 'smooth' });
+    },
+  },
+  {
+    icon: <Bell size={22} />,
+    label: 'Alerts',
+    onClick: () => console.log('Alerts'),
+  },
+  {
+    icon: <LogIn size={22} />,
+    label: 'Login',
+    onClick: () => console.log('Login'),
+  },
 ];
 
 export default function Navbar() {
@@ -14,17 +30,17 @@ export default function Navbar() {
         AGROPULSE<span className="dot">.</span>
       </div>
 
-      <ul className="nav-links">
-        {navLinks.map((link) => (
-          <li key={link.label}>
-            <a href={link.href}>{link.label}</a>
-          </li>
-        ))}
-      </ul>
-
-      <div className="nav-right">
-        <button className="nav-cta">Request Demo</button>
+      <div className="nav-dock-wrapper">
+        <MagnificationDock
+          items={dockItems}
+          panelHeight={48}
+          baseItemSize={36}
+          magnification={56}
+          distance={140}
+        />
       </div>
+
+      <div className="nav-spacer" />
     </nav>
   );
 }
