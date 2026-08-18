@@ -13,7 +13,7 @@ function ease(t) {
 }
 
 const HERO_IMG =
-  'https://images.unsplash.com/photo-1753153481105-7a979eabe5a9?fm=jpg&q=80&w=2400&auto=format&fit=crop';
+  'https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=2400&auto=format&fit=crop';
 
 export default function PortalHero() {
   const heroRef = useRef(null);
@@ -113,7 +113,7 @@ export default function PortalHero() {
           className="hero-img"
           ref={imgRef}
           src={HERO_IMG}
-          alt="A control room of monitors, dimly lit"
+          alt="Golden agricultural field at sunrise"
         />
         <div className="duotone" ref={duoRef} />
         <div className="veil" />
@@ -136,27 +136,27 @@ export default function PortalHero() {
 
         {/* ── Corner metadata ── */}
         <div className="meta meta-tl">
-          Ops deck<br />
-          <span className="value">Live systems view</span>
+          Field Station<br />
+          <span className="value">Live sensor feed</span>
         </div>
 
         <div className="meta meta-tr">
-          <span className="rule" />Uptime<br />
-          <span className="value">99.98%</span> — rolling 90d
+          <span className="rule" />Nodes Online<br />
+          <span className="value">24 / 24</span> — all active
         </div>
 
         <div className="meta meta-bl">
-          <span className="eyebrow">Real-time ops command</span>
+          <span className="eyebrow">Microclimate Early-Warning</span>
           <span className="lede">
-            Alerts, on-call, and system status — every signal your team watches,
-            in one room.
+            Field-level weather, soil, and crop intelligence — every signal
+            your farm needs, in real time.
           </span>
         </div>
 
         <div className="meta meta-br">
-          Region<br />
-          <span className="value">US-EAST-1</span> / EU-WEST-1<br />
-          Incidents <span className="value">0 open</span> — 24h
+          Alert Status<br />
+          <span className="value">Clear</span> — all zones<br />
+          Warnings <span className="value">0 active</span> — 24h
         </div>
 
         {/* ── Scroll cue ── */}

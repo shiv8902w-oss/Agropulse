@@ -1,10 +1,10 @@
 import './Navbar.css';
 
 const navLinks = [
-  { label: 'Platform', href: '#platform' },
-  { label: 'Status', href: '#status' },
-  { label: 'Pricing', href: '#pricing' },
-  { label: 'Docs', href: '#docs' },
+  { label: 'Dashboard', href: '#solutions' },
+  { label: 'Sensors', href: '#sensors' },
+  { label: 'Alerts', href: '#alerts' },
+  { label: 'About', href: '#about' },
 ];
 
 export default function Navbar() {
@@ -23,7 +23,7 @@ export default function Navbar() {
       </ul>
 
       <div className="nav-right">
-        <button className="nav-cta">Start free</button>
+        <button className="nav-cta">Request Demo</button>
       </div>
     </nav>
   );
