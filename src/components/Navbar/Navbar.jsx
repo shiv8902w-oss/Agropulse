@@ -1,29 +1,30 @@
+import { useContext } from 'react';
 import { LayoutDashboard, Bell, LogIn } from 'lucide-react';
+import { PageContext } from '../../App';
 import MagnificationDock from '../MagnificationDock/MagnificationDock';
 import './Navbar.css';
 
-const dockItems = [
-  {
-    icon: <LayoutDashboard size={22} />,
-    label: 'Dashboard',
-    onClick: () => {
-      const el = document.getElementById('solutions');
-      if (el) el.scrollIntoView({ behavior: 'smooth' });
-    },
-  },
-  {
-    icon: <Bell size={22} />,
-    label: 'Alerts',
-    onClick: () => console.log('Alerts'),
-  },
-  {
-    icon: <LogIn size={22} />,
-    label: 'Login',
-    onClick: () => console.log('Login'),
-  },
-];
-
 export default function Navbar() {
+  const { setPage } = useContext(PageContext);
+
+  const dockItems = [
+    {
+      icon: <LayoutDashboard size={22} />,
+      label: 'Dashboard',
+      onClick: () => setPage('dashboard'),
+    },
+    {
+      icon: <Bell size={22} />,
+      label: 'Alerts',
+      onClick: () => console.log('Alerts'),
+    },
+    {
+      icon: <LogIn size={22} />,
+      label: 'Login',
+      onClick: () => setPage('login'),
+    },
+  ];
+
   return (
     <nav className="nav" role="navigation" aria-label="Main navigation">
       <div className="nav-word">
