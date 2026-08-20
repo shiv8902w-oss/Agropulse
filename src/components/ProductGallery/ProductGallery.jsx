@@ -1,13 +1,59 @@
-import { useRef, useCallback, useEffect, useState } from 'react';
+import { useRef, useCallback, useEffect, useState, Suspense, useMemo } from 'react';
+import { Canvas } from '@react-three/fiber';
+import { OrbitControls, useGLTF, Center, Environment } from '@react-three/drei';
 import './ProductGallery.css';
+
+/* ── 3D Model helpers ─────────────────────── */
+const MODEL_PATH = '/dht22_temperature_sensor_module.glb';
+
+/** Each instance clones the scene so multiple Canvases don't conflict */
+function SensorModel() {
+  const { scene } = useGLTF(MODEL_PATH);
+  const clone = useMemo(() => scene.clone(true), [scene]);
+  return <primitive object={clone} scale={40} />;
+}
+
+useGLTF.preload(MODEL_PATH);
+
+/** Reusable 3D viewer — `interactive` enables drag-rotate / zoom in the modal */
+function ModelViewer({ interactive = false }) {
+  return (
+    <div style={{ position: 'absolute', inset: 0, width: '100%', height: '100%' }}>
+      <Canvas
+        camera={{ position: [3, 2, 5], fov: 45 }}
+        dpr={[1, 1.5]}
+        style={{ width: '100%', height: '100%' }}
+      >
+        <ambientLight intensity={2.5} />
+        <directionalLight position={[5, 8, 5]} intensity={2} />
+        <directionalLight position={[-5, -3, -5]} intensity={1} />
+        <pointLight position={[0, 5, 3]} intensity={1.5} />
+        <Suspense fallback={null}>
+          <Center>
+            <SensorModel />
+          </Center>
+          <Environment preset="city" />
+        </Suspense>
+        <OrbitControls
+          enableZoom={interactive}
+          enablePan={interactive}
+          enableRotate={interactive}
+          autoRotate
+          autoRotateSpeed={1.2}
+        />
+      </Canvas>
+    </div>
+  );
+}
 
 /* ── Gallery view data ─────────────────────── */
 const VIEWS = [
   {
-    label: 'IMG_FRONT_VIEW',
-    eyebrow: 'Front View',
+    label: 'DHT22_SENSOR',
+    eyebrow: 'DHT22 Temperature Sensor',
+    is3D: true,
     desc:
-      'The Field Shell is built for the gap between a rain jacket and a real shell — light enough to carry every day, sealed enough to trust on a ridge line. A three-layer recycled nylon face keeps the garment stiff enough to hold its shape off the body.',
+      'The DHT22 is a low-cost digital temperature and humidity sensor. It uses a capacitive humidity sensor and a thermistor to measure the surrounding air, delivering calibrated digital output via a single-wire protocol — ideal for field-level environmental monitoring.',
   },
   {
     label: 'IMG_BACK_VIEW',
@@ -41,18 +87,29 @@ const TOTAL = VIEWS.length;
 function GalleryCard({ index, onClick }) {
   const v = VIEWS[index];
   return (
-    <div className="pg-card" data-i={index} onClick={() => onClick(index)}>
+    <div className={`pg-card${v.is3D ? ' pg-card--has-embed' : ''}`} data-i={index}>
       {/* Corner bracket decorations */}
       <span className="pg-bracket tl" />
       <span className="pg-bracket tr" />
       <span className="pg-bracket bl" />
       <span className="pg-bracket br" />
 
-      <span className="pg-label">{v.label}</span>
+      {v.is3D ? (
+        <>
+          <div className="pg-card-iframe">
+            <ModelViewer interactive={false} />
+          </div>
+          {/* Transparent overlay so the card click still fires */}
+          <div className="pg-card-click-layer" onClick={() => onClick(index)} />
+        </>
+      ) : (
+        <span className="pg-label">{v.label}</span>
+      )}
+
       <span className="pg-counter">
         {String(index + 1).padStart(2, '0')} / {String(TOTAL).padStart(2, '0')}
       </span>
-      <span className="pg-expand">VIEW</span>
+      <span className="pg-expand" onClick={() => onClick(index)}>VIEW</span>
     </div>
   );
 }
@@ -101,7 +158,7 @@ export default function ProductGallery() {
       <section className="gallery-section" id="gallery">
         {/* Section heading */}
         <div className="gallery-header">
-          <span className="gallery-eyebrow">Product Gallery</span>
+          <span className="gallery-eyebrow">Sensors Gallery</span>
           <h2 className="gallery-title">
             Field Shell Jacket<span className="title-accent">.</span>
           </h2>
@@ -143,8 +200,14 @@ export default function ProductGallery() {
             ×
           </button>
 
-          <div className="pg-modal-visual">
-            <span className="pg-label">{v.label}</span>
+          <div className={`pg-modal-visual${v.is3D ? ' pg-modal-visual--embed' : ''}`}>
+            {v.is3D ? (
+              <div className="pg-modal-iframe">
+                <ModelViewer interactive={true} />
+              </div>
+            ) : (
+              <span className="pg-label">{v.label}</span>
+            )}
           </div>
 
           <div className="pg-modal-info">
