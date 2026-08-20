@@ -1,0 +1,401 @@
+/* ============================================
+   PRODUCT GALLERY — continuous marquee + modal
+   ============================================ */
+
+/* ── Section ── */
+.gallery-section {
+  padding: 80px 0 96px;
+  background: var(--ground);
+  overflow: hidden;
+}
+
+.gallery-header {
+  max-width: 1440px;
+  margin: 0 auto 48px;
+  padding: 0 40px;
+}
+
+.gallery-eyebrow {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--muted);
+  display: block;
+  margin-bottom: 12px;
+}
+
+.gallery-title {
+  font-family: 'Syne', sans-serif;
+  font-size: clamp(28px, 3.4vw, 48px);
+  font-weight: 800;
+  letter-spacing: -.02em;
+  line-height: 1.1;
+  margin: 0;
+  color: var(--ink);
+}
+
+.gallery-title .title-accent {
+  color: var(--muted);
+}
+
+/* ── Viewport & Track (marquee) ── */
+.gallery-viewport {
+  overflow: hidden;
+  width: 100%;
+}
+
+.gallery-track {
+  display: flex;
+  gap: 24px;
+  width: max-content;
+  animation: pg-marquee 38s linear infinite;
+}
+
+.gallery-viewport:hover .gallery-track,
+.gallery-track.paused {
+  animation-play-state: paused;
+}
+
+@keyframes pg-marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+/* ── Gallery Card ── */
+.pg-card {
+  flex: 0 0 auto;
+  width: 30vw;
+  aspect-ratio: 4 / 5;
+  position: relative;
+  cursor: pointer;
+  background: var(--ground-2);
+  border: 1px solid var(--hairline);
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 320ms cubic-bezier(.22, 1, .36, 1),
+              box-shadow 320ms cubic-bezier(.22, 1, .36, 1);
+  overflow: hidden;
+}
+
+/* Subtle hatching pattern overlay */
+.pg-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    repeating-linear-gradient(
+      45deg,
+      rgba(1, 71, 46, .04) 0px,
+      rgba(1, 71, 46, .04) 10px,
+      transparent 10px,
+      transparent 20px
+    );
+  border-radius: inherit;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.pg-card:hover {
+  transform: translateY(-6px);
+  box-shadow:
+    0 24px 48px -16px rgba(1, 71, 46, .14),
+    0 0 0 1px rgba(1, 71, 46, .06);
+}
+
+.pg-card .pg-label {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: .08em;
+  color: var(--ink-2);
+  background: rgba(254, 250, 224, .82);
+  padding: 6px 14px;
+  border-radius: 6px;
+  pointer-events: none;
+  z-index: 2;
+  backdrop-filter: blur(4px);
+}
+
+.pg-card .pg-counter {
+  position: absolute;
+  left: 18px;
+  bottom: 18px;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px;
+  color: var(--muted);
+  pointer-events: none;
+  z-index: 2;
+}
+
+.pg-card .pg-expand {
+  position: absolute;
+  right: 18px;
+  bottom: 18px;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--ink);
+  background: rgba(254, 250, 224, .82);
+  padding: 5px 12px;
+  border-radius: 4px;
+  backdrop-filter: blur(4px);
+  opacity: 0;
+  transform: translateY(4px);
+  transition: opacity 280ms ease, transform 280ms ease;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.pg-card:hover .pg-expand {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ── Corner brackets decoration on card ── */
+.pg-card .pg-bracket {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  border-color: rgba(1, 71, 46, .18);
+  border-style: solid;
+  border-width: 0;
+  z-index: 2;
+  pointer-events: none;
+  transition: border-color 280ms ease;
+}
+
+.pg-card:hover .pg-bracket {
+  border-color: rgba(1, 71, 46, .35);
+}
+
+.pg-bracket.tl { top: 14px; left: 14px; border-top-width: 1px; border-left-width: 1px; }
+.pg-bracket.tr { top: 14px; right: 14px; border-top-width: 1px; border-right-width: 1px; }
+.pg-bracket.bl { bottom: 14px; left: 14px; border-bottom-width: 1px; border-left-width: 1px; }
+.pg-bracket.br { bottom: 14px; right: 14px; border-bottom-width: 1px; border-right-width: 1px; }
+
+/* ── Modal Overlay ── */
+.pg-modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  background: rgba(1, 71, 46, .55);
+  backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 280ms ease;
+}
+
+.pg-modal-overlay.open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* ── Modal ── */
+.pg-modal {
+  background: var(--ground);
+  width: 100%;
+  max-width: 960px;
+  max-height: 88vh;
+  overflow: auto;
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  position: relative;
+  border-radius: 20px;
+  border: 1px solid var(--hairline);
+  box-shadow:
+    0 40px 80px -24px rgba(1, 71, 46, .22),
+    0 0 0 1px rgba(1, 71, 46, .04);
+  transform: translateY(20px) scale(.97);
+  transition: transform 320ms cubic-bezier(.22, 1, .36, 1);
+}
+
+.pg-modal-overlay.open .pg-modal {
+  transform: translateY(0) scale(1);
+}
+
+/* ── Modal Visual ── */
+.pg-modal-visual {
+  aspect-ratio: 4 / 5;
+  background: var(--ground-2);
+  border-right: 1px solid var(--hairline);
+  border-radius: 20px 0 0 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.pg-modal-visual::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    repeating-linear-gradient(
+      45deg,
+      rgba(1, 71, 46, .04) 0px,
+      rgba(1, 71, 46, .04) 14px,
+      transparent 14px,
+      transparent 28px
+    );
+  pointer-events: none;
+}
+
+.pg-modal-visual .pg-label {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--ink-2);
+  background: rgba(254, 250, 224, .82);
+  padding: 8px 16px;
+  border-radius: 6px;
+  backdrop-filter: blur(4px);
+  z-index: 1;
+}
+
+/* ── Modal Info ── */
+.pg-modal-info {
+  padding: 48px 40px;
+  display: flex;
+  flex-direction: column;
+}
+
+.pg-modal-eyebrow {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 16px;
+}
+
+.pg-modal-title {
+  font-family: 'Syne', sans-serif;
+  font-size: 36px;
+  font-weight: 800;
+  line-height: 1.05;
+  text-transform: uppercase;
+  letter-spacing: -.01em;
+  margin: 0 0 12px;
+  color: var(--ink);
+}
+
+.pg-modal-price {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 16px;
+  color: var(--ink-2);
+  margin-bottom: 28px;
+}
+
+.pg-modal-divider {
+  width: 40px;
+  height: 2px;
+  background: var(--ink);
+  margin-bottom: 24px;
+  border-radius: 1px;
+}
+
+.pg-modal-desc {
+  font-family: 'Sora', sans-serif;
+  font-size: 14.5px;
+  line-height: 1.7;
+  color: var(--ink-2);
+  margin: 0;
+  max-width: 40ch;
+}
+
+/* ── Modal Close Button ── */
+.pg-modal-close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  width: 38px;
+  height: 38px;
+  background: var(--ground);
+  border: 1px solid var(--hairline);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  line-height: 1;
+  color: var(--ink);
+  z-index: 10;
+  cursor: pointer;
+  transition: background 200ms ease, transform 200ms ease;
+}
+
+.pg-modal-close:hover {
+  background: var(--ground-2);
+  transform: scale(1.06);
+}
+
+/* ─────────────────────────────────────────────
+   Responsive
+   ───────────────────────────────────────────── */
+@media (max-width: 900px) {
+  .gallery-header {
+    padding: 0 20px;
+    margin-bottom: 32px;
+  }
+
+  .pg-card {
+    width: 72vw;
+    border-radius: 12px;
+  }
+
+  .gallery-track {
+    gap: 16px;
+  }
+}
+
+@media (max-width: 760px) {
+  .gallery-section {
+    padding: 56px 0 64px;
+  }
+
+  .pg-modal {
+    grid-template-columns: 1fr;
+    max-height: 92vh;
+    border-radius: 16px;
+  }
+
+  .pg-modal-visual {
+    border-right: none;
+    border-bottom: 1px solid var(--hairline);
+    border-radius: 16px 16px 0 0;
+    aspect-ratio: 16 / 10;
+  }
+
+  .pg-modal-info {
+    padding: 28px 24px;
+  }
+
+  .pg-modal-title {
+    font-size: 26px;
+  }
+}
+
+/* ── Reduced motion ── */
+@media (prefers-reduced-motion: reduce) {
+  .gallery-track {
+    animation: none;
+  }
+
+  .pg-card,
+  .pg-expand,
+  .pg-modal,
+  .pg-modal-overlay {
+    transition-duration: 0.001ms !important;
+  }
+}

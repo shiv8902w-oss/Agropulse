@@ -2,6 +2,7 @@ import { useState, createContext } from 'react';
 import Navbar from './components/Navbar/Navbar';
 import PortalHero from './components/PortalHero/PortalHero';
 import StackedCards from './components/StackedCards/StackedCards';
+import ProductGallery from './components/ProductGallery/ProductGallery';
 import LoginPage from './components/LoginPage/LoginPage';
 import Dashboard from './components/Dashboard/Dashboard';
 
@@ -23,6 +24,7 @@ export default function App() {
       <Navbar />
       <PortalHero />
       <StackedCards />
+      <ProductGallery />
     </PageContext.Provider>
   );
 }
