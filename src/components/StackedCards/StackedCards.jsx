@@ -1,4 +1,5 @@
 import { useRef, useEffect, useCallback } from 'react';
+import { T } from '../Language/Language';
 import './StackedCards.css';
 
 const CARDS = [
@@ -132,7 +133,7 @@ export default function StackedCards() {
           <div className="media-hud">
             <div className="hud-indicator">
               <span className="hud-dot" />
-              <span className="hud-label">LIVE FEED</span>
+              <span className="hud-label"><T>LIVE FEED</T></span>
             </div>
             <span className="hud-counter" ref={counterRef}>
               01 / {String(CARDS.length).padStart(2, '0')}
@@ -154,9 +155,9 @@ export default function StackedCards() {
       {/* ── Right: Stacking cards ── */}
       <div className="cards-column">
         <div className="cards-header">
-          <span className="cards-eyebrow">The System</span>
+          <span className="cards-eyebrow"><T>The System</T></span>
           <h2 className="cards-title">
-            Sensing what your<br />crops can&rsquo;t tell you<span className="title-dot">.</span>
+            <T>Sensing what your crops can't tell you</T><span className="title-dot">.</span>
           </h2>
         </div>
 
@@ -165,19 +166,19 @@ export default function StackedCards() {
             <article className="sc-card" ref={(el) => (cardRefs.current[i] = el)}>
               <div className="sc-card-content">
                 <div className="sc-card-meta">
-                  <span className="sc-card-tag">{c.tag}</span>
+                  <span className="sc-card-tag"><T>{c.tag}</T></span>
                   <span className="sc-card-count">
                     {String(i + 1).padStart(2, '0')} / {String(CARDS.length).padStart(2, '0')}
                   </span>
                 </div>
-                <h3>{c.title}</h3>
-                <p>{c.desc}</p>
+                <h3><T>{c.title}</T></h3>
+                <p><T>{c.desc}</T></p>
                 <div className="sc-card-footer">
                   <div className="sc-card-techs">
-                    {c.techs.map((t) => (<span key={t}>{t}</span>))}
+                    {c.techs.map((t) => (<span key={t}><T>{t}</T></span>))}
                   </div>
                   <a className="sc-card-link" href="#">
-                    Explore
+                    <T>Explore</T>
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                       <path d="M7 17L17 7M7 7h10v10" />
                     </svg>

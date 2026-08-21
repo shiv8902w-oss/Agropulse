@@ -2,6 +2,7 @@ import { useContext } from 'react';
 import { LayoutDashboard, Bell, LogIn } from 'lucide-react';
 import { PageContext } from '../../App';
 import MagnificationDock from '../MagnificationDock/MagnificationDock';
+import { LanguageToggle, T } from '../Language/Language';
 import './Navbar.css';
 
 export default function Navbar() {
@@ -10,17 +11,17 @@ export default function Navbar() {
   const dockItems = [
     {
       icon: <LayoutDashboard size={22} />,
-      label: 'Dashboard',
+      label: <T>Dashboard</T>,
       onClick: () => setPage('dashboard'),
     },
     {
       icon: <Bell size={22} />,
-      label: 'Alerts',
+      label: <T>Alerts</T>,
       onClick: () => console.log('Alerts'),
     },
     {
       icon: <LogIn size={22} />,
-      label: 'Login',
+      label: <T>Login</T>,
       onClick: () => setPage('login'),
     },
   ];
@@ -41,7 +42,10 @@ export default function Navbar() {
         />
       </div>
 
-      <div className="nav-spacer" />
+      <div className="nav-right">
+        <LanguageToggle />
+      </div>
     </nav>
   );
 }
+

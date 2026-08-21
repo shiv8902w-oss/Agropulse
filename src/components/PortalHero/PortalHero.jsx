@@ -1,4 +1,5 @@
 import { useRef, useEffect, useCallback } from 'react';
+import { T } from '../Language/Language';
 import './PortalHero.css';
 
 /* ── Utility helpers ─────────────────────── */
@@ -136,32 +137,31 @@ export default function PortalHero() {
 
         {/* ── Corner metadata ── */}
         <div className="meta meta-tl">
-          Field Station<br />
-          <span className="value">Live sensor feed</span>
+          <T>Field Station</T><br />
+          <span className="value"><T>Live sensor feed</T></span>
         </div>
 
         <div className="meta meta-tr">
-          <span className="rule" />Nodes Online<br />
-          <span className="value">24 / 24</span> — all active
+          <span className="rule" /><T>Nodes Online</T><br />
+          <span className="value">24 / 24</span> — <T>all active</T>
         </div>
 
         <div className="meta meta-bl">
-          <span className="eyebrow">Microclimate Early-Warning</span>
+          <span className="eyebrow"><T>Microclimate Early-Warning</T></span>
           <span className="lede">
-            Field-level weather, soil, and crop intelligence — every signal
-            your farm needs, in real time.
+            <T>Field-level weather, soil, and crop intelligence — every signal your farm needs, in real time.</T>
           </span>
         </div>
 
         <div className="meta meta-br">
-          Alert Status<br />
-          <span className="value">Clear</span> — all zones<br />
-          Warnings <span className="value">0 active</span> — 24h
+          <T>Alert Status</T><br />
+          <span className="value"><T>Clear</T></span> — <T>all zones</T><br />
+          <T>Warnings</T> <span className="value"><T>0 active</T></span> — 24h
         </div>
 
         {/* ── Scroll cue ── */}
         <div className="scroll-cue" ref={cueRef}>
-          Scroll to open
+          <T>Scroll to open</T>
           <div className="line" />
         </div>
       </div>

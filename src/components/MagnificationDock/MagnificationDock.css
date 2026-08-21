@@ -85,4 +85,8 @@
   .dock-item-text {
     display: none;
   }
+  .dock-item-wrapper {
+    gap: 0;
+    padding: 0;
+  }
 }

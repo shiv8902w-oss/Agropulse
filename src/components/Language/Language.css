@@ -1,0 +1,67 @@
+/* ============================================
+   LANGUAGE TOGGLE  —  EN / हि
+   ============================================ */
+
+/* ── Toggle button ── */
+.lang-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  border: 1px solid var(--hairline);
+  border-radius: 999px;
+  background: rgba(254, 250, 224, 0.88);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--ink);
+  cursor: pointer;
+  transition: border-color 200ms ease,
+              box-shadow 200ms ease,
+              transform 160ms ease;
+  white-space: nowrap;
+}
+
+.lang-toggle:hover {
+  border-color: rgba(1, 71, 46, 0.28);
+  box-shadow: 0 2px 12px -4px rgba(1, 71, 46, 0.12);
+}
+
+.lang-toggle:active {
+  transform: scale(0.95);
+}
+
+/* ── Icon ── */
+.lang-toggle-icon {
+  width: 15px;
+  height: 15px;
+  color: var(--ink-2);
+  flex-shrink: 0;
+}
+
+/* ── Language labels ── */
+.lang-label {
+  color: var(--muted);
+  transition: color 200ms ease;
+}
+
+.lang-label--active {
+  color: var(--ink);
+  font-weight: 600;
+}
+
+.lang-divider {
+  color: var(--muted);
+  opacity: 0.5;
+}
+
+/* ── T wrapper (translated text) ── */
+.lang-t {
+  transition: opacity 200ms ease;
+}
+
+.lang-t--loading {
+  opacity: 0.45;
+}

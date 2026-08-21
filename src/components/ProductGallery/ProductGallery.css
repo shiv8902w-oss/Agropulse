@@ -52,6 +52,10 @@
   animation: pg-marquee 38s linear infinite;
 }
 
+.gallery-track--reverse {
+  animation: pg-marquee-reverse 38s linear infinite;
+}
+
 .gallery-viewport:hover .gallery-track,
 .gallery-track.paused {
   animation-play-state: paused;
@@ -67,10 +71,21 @@
   }
 }
 
+@keyframes pg-marquee-reverse {
+  from {
+    transform: translateX(-50%);
+  }
+
+  to {
+    transform: translateX(0);
+  }
+}
+
 /* ── Gallery Card ── */
 .pg-card {
   flex: 0 0 auto;
-  width: 30vw;
+  width: 22vw;
+  max-width: 260px;
   aspect-ratio: 4 / 5;
   position: relative;
   cursor: pointer;
@@ -120,6 +135,29 @@
   pointer-events: none;
   z-index: 2;
   backdrop-filter: blur(4px);
+}
+
+.pg-card .pg-card-title {
+  position: absolute;
+  bottom: 42px;
+  left: 14px;
+  right: 14px;
+  text-align: center;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: .04em;
+  color: var(--ink);
+  background: rgba(254, 250, 224, 0.88);
+  backdrop-filter: blur(6px);
+  padding: 5px 10px;
+  border-radius: 6px;
+  border: 1px solid rgba(1, 71, 46, 0.08);
+  pointer-events: none;
+  z-index: 3;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .pg-card .pg-counter {
@@ -420,7 +458,7 @@
   }
 
   .pg-card {
-    width: 72vw;
+    width: 58vw;
     border-radius: 12px;
   }
 

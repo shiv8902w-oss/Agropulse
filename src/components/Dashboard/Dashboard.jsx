@@ -1,3 +1,4 @@
+import { T } from '../Language/Language';
 import './Dashboard.css';
 
 /* ── Static data ── */
@@ -94,10 +95,10 @@ export default function Dashboard({ onBack }) {
           </button>
           <span className="db-wordmark">AGROPULSE</span>
           <nav className="db-nav-links">
-            <span className="db-nav-active">Overview</span>
-            <span>Sensors</span>
-            <span>Alerts</span>
-            <span>Reports</span>
+            <span className="db-nav-active"><T>Overview</T></span>
+            <span><T>Sensors</T></span>
+            <span><T>Alerts</T></span>
+            <span><T>Reports</T></span>
           </nav>
         </div>
         <div className="db-bar-right">
@@ -107,7 +108,7 @@ export default function Dashboard({ onBack }) {
           </div>
           <span className="db-date-pill">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
-            Last 7 days
+            <T>Last 7 days</T>
           </span>
           <button className="db-bell">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 01-3.46 0"/></svg>
@@ -120,15 +121,15 @@ export default function Dashboard({ onBack }) {
       {/* ══════ PAGE HEADER ══════ */}
       <div className="db-header">
         <div>
-          <h1 className="db-h1">Field Overview</h1>
-          <p className="db-subtitle">SENSOR ANALYTICS &middot; UPDATED 4 MIN AGO</p>
+          <h1 className="db-h1"><T>Field Overview</T></h1>
+          <p className="db-subtitle"><T>SENSOR ANALYTICS</T> &middot; <T>UPDATED 4 MIN AGO</T></p>
         </div>
         <div className="db-header-actions">
           <div className="db-seg">
-            <span>Day</span><span className="db-seg-active">Week</span><span>Month</span>
+            <span><T>Day</T></span><span className="db-seg-active"><T>Week</T></span><span><T>Month</T></span>
           </div>
-          <button className="db-ghost">Export</button>
-          <button className="db-primary">+ Add Widget</button>
+          <button className="db-ghost"><T>Export</T></button>
+          <button className="db-primary"><T>+ Add Widget</T></button>
         </div>
       </div>
 
@@ -138,7 +139,7 @@ export default function Dashboard({ onBack }) {
         {/* 1 — Temperature hero (2x2) */}
         <div className="db-tile db-tile-hero db-span-2x2">
           <div className="db-tile-head">
-            <span className="db-eyebrow">AVG TEMPERATURE</span>
+            <span className="db-eyebrow"><T>AVG TEMPERATURE</T></span>
             <div className="db-mini-toggle">
               <span>12M</span><span className="active">30D</span><span>7D</span>
             </div>
@@ -183,7 +184,7 @@ export default function Dashboard({ onBack }) {
 
         {/* 2 — Active Sensors (1x1) */}
         <div className="db-tile db-span-1x1">
-          <span className="db-eyebrow">ACTIVE SENSORS</span>
+          <span className="db-eyebrow"><T>ACTIVE SENSORS</T></span>
           <div className="db-big-row">
             <span className="db-big-num db-mono">24 / 24</span>
             <span className="db-delta db-delta-up">&#9650; +0</span>
@@ -195,7 +196,7 @@ export default function Dashboard({ onBack }) {
 
         {/* 3 — Soil Moisture (1x1) */}
         <div className="db-tile db-span-1x1">
-          <span className="db-eyebrow">AVG SOIL MOISTURE</span>
+          <span className="db-eyebrow"><T>AVG SOIL MOISTURE</T></span>
           <div className="db-big-row">
             <span className="db-big-num db-mono">68%</span>
             <span className="db-delta db-delta-up">&#9650; +4.2%</span>
@@ -208,7 +209,7 @@ export default function Dashboard({ onBack }) {
         {/* 4 — Live Sensor Feed (1x2 tall) */}
         <div className="db-tile db-span-1x2">
           <div className="db-tile-head">
-            <span className="db-eyebrow" style={{ margin: 0 }}>Live Sensor Feed</span>
+            <span className="db-eyebrow" style={{ margin: 0 }}><T>Live Sensor Feed</T></span>
             <span className="db-live-dot" />
           </div>
           <div className="db-feed">
@@ -216,8 +217,8 @@ export default function Dashboard({ onBack }) {
               <div className="db-feed-row" key={i}>
                 <span className="db-feed-avatar">{e.initials}</span>
                 <div className="db-feed-body">
-                  <span className="db-feed-text">{e.text}</span>
-                  <span className="db-feed-time">{e.time}</span>
+                  <span className="db-feed-text"><T>{e.text}</T></span>
+                  <span className="db-feed-time"><T>{e.time}</T></span>
                 </div>
                 <span className="db-feed-dot" style={{ background: e.color }} />
               </div>
@@ -227,19 +228,19 @@ export default function Dashboard({ onBack }) {
 
         {/* 5 — Sensor Distribution (1x2 tall) */}
         <div className="db-tile db-span-1x2 db-tile-donut">
-          <span className="db-eyebrow">SENSOR DISTRIBUTION</span>
+          <span className="db-eyebrow"><T>SENSOR DISTRIBUTION</T></span>
           <div className="db-donut-wrap">
             <Donut data={DONUT_DATA} />
             <div className="db-donut-center">
               <span className="db-donut-num">24</span>
-              <span className="db-donut-label">SENSORS</span>
+              <span className="db-donut-label"><T>SENSORS</T></span>
             </div>
           </div>
           <div className="db-legend">
             {DONUT_DATA.map((d, i) => (
               <div className="db-legend-row" key={i}>
                 <span className="db-legend-dot" style={{ background: d.color }} />
-                <span className="db-legend-name">{d.label}</span>
+                <span className="db-legend-name"><T>{d.label}</T></span>
                 <span className="db-legend-pct">{d.pct}%</span>
               </div>
             ))}
@@ -257,21 +258,21 @@ export default function Dashboard({ onBack }) {
           <div className="db-gauge-center">
             <span className="db-gauge-pct">82%</span>
           </div>
-          <span className="db-eyebrow db-gauge-label">FIELD HEALTH SCORE</span>
-          <span className="db-mono db-gauge-val">Good</span>
+          <span className="db-eyebrow db-gauge-label"><T>FIELD HEALTH SCORE</T></span>
+          <span className="db-mono db-gauge-val"><T>Good</T></span>
         </div>
 
         {/* 7 — Zone Status (3x1 wide) */}
         <div className="db-tile db-span-3x1">
           <div className="db-tile-head">
-            <span className="db-eyebrow" style={{ margin: 0 }}>Zone Status</span>
-            <a href="#" className="db-view-all">View all</a>
+            <span className="db-eyebrow" style={{ margin: 0 }}><T>Zone Status</T></span>
+            <a href="#" className="db-view-all"><T>View all</T></a>
           </div>
           <div className="db-table-scroll">
             <table className="db-table">
               <thead>
                 <tr>
-                  <th>Zone</th><th>Temp</th><th>Humidity</th><th>Wind</th><th>7-Day Trend</th>
+                  <th><T>Zone</T></th><th><T>Temp</T></th><th><T>Humidity</T></th><th><T>Wind</T></th><th><T>7-Day Trend</T></th>
                 </tr>
               </thead>
               <tbody>
